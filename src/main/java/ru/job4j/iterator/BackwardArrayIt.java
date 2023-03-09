@@ -18,7 +18,7 @@ public class BackwardArrayIt implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        if (point < 0) {
+        if (!hasNext()) {
             throw new NoSuchFieldError("Data is empty");
         }
         return data[point--];
