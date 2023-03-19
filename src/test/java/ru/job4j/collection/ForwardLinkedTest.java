@@ -143,4 +143,13 @@ class ForwardLinkedTest {
         assertThat(second.next()).isEqualTo(2);
         assertThat(second.hasNext()).isFalse();
     }
+
+    @Test
+    void whenDeleteFirstAndHasNextException() {
+        Iterator<Integer> it = list.iterator();
+        assertThat(it.hasNext()).isTrue();
+        list.deleteFirst();
+        assertThatThrownBy(it::hasNext)
+                .isInstanceOf(ConcurrentModificationException.class);
+    }
 }
