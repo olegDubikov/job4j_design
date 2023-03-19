@@ -109,6 +109,7 @@ class SimpleLinkedListTest {
         assertThatThrownBy(iterator::next)
                 .isInstanceOf(ConcurrentModificationException.class);
     }
+
     @Test
     void whenAddAndGetByCorrectIndex() {
         list.add(3);
