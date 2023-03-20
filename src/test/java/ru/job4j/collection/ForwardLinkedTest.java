@@ -162,4 +162,13 @@ class ForwardLinkedTest {
         assertThatThrownBy(it::next)
                 .isInstanceOf(ConcurrentModificationException.class);
     }
+
+    @Test
+    void whenListIsEmptyAndAddFirstAndGet() {
+        ForwardLinked<Integer> list = new ForwardLinked<>();
+        list.addFirst(2);
+        list.addFirst(1);
+        assertThat(list.get(0)).isEqualTo(1);
+        assertThat(list.get(1)).isEqualTo(2);
+    }
 }
