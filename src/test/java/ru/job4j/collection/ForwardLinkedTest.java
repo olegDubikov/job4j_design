@@ -29,10 +29,11 @@ class ForwardLinkedTest {
     }
 
     @Test
-    void checkAdd() {
+    void checkAddAndAddFirst() {
         assertThat(list).containsExactly(1, 2);
         list.add(3);
-        assertThat(list).containsExactly(1, 2, 3);
+        list.addFirst(4);
+        assertThat(list).containsExactly(4, 1, 2, 3);
     }
 
     @Test
@@ -150,6 +151,15 @@ class ForwardLinkedTest {
         assertThat(it.hasNext()).isTrue();
         list.deleteFirst();
         assertThatThrownBy(it::hasNext)
+                .isInstanceOf(ConcurrentModificationException.class);
+    }
+
+    @Test
+    void whenAddFirstAndNextException() {
+        Iterator<Integer> it = list.iterator();
+        assertThat(it.hasNext()).isTrue();
+        list.addFirst(1);
+        assertThatThrownBy(it::next)
                 .isInstanceOf(ConcurrentModificationException.class);
     }
 }
