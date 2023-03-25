@@ -50,20 +50,20 @@ class ListUtilsTest {
 
     @Test
     void whenRemoveIf() {
-        ListUtils.removeIf(list1, e -> e.equals(3));
+        ListUtils.removeIf(list1, e -> e > 2);
         assertThat(list1).hasSize(1).containsSequence(1);
 
     }
 
     @Test
     void whenReplaceIf() {
-        ListUtils.replaceIf(list1, e -> e.equals(1), 2);
-        assertThat(list1).hasSize(2).containsSequence(2, 3);
+        ListUtils.replaceIf(list1, e -> e.equals(3), 10);
+        assertThat(list1).hasSize(2).containsSequence(1, 10);
     }
 
     @Test
     void whenRemoveAll() {
         ListUtils.removeAll(list1, list2);
-        assertThat(list1).hasSize(2).containsSequence(1, 3);
+        assertThat(list1).hasSize(1).containsSequence(1);
     }
 }
