@@ -38,6 +38,17 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return key == null ? 0 : indexFor(hash(key.hashCode()));
     }
 
+    private boolean check(K key) {
+        boolean result = false;
+        int index = getBasket(key);
+        if (table[index] != null && key != null && table[index].key != null
+                && key.hashCode() == table[index].key.hashCode()
+                || table[index] != null && Objects.equals(table[index].key, key)) {
+            result = true;
+        }
+        return result;
+    }
+
     private void expand() {
         if (count >= capacity * LOAD_FACTOR) {
             MapEntry<K, V>[] temp = table;
@@ -45,7 +56,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
             table = new MapEntry[capacity];
             for (MapEntry<K, V> el : temp) {
                 if (el != null) {
-                    table[getBasket(el.key)] = new MapEntry<>(el.key, el.value);
+                    table[getBasket(el.key)] = el;
                 }
             }
         }
@@ -55,9 +66,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         V result = null;
         int index = getBasket(key);
-        if (table[index] != null && key != null && table[index].key != null
-                && key.hashCode() == table[index].key.hashCode()
-                || table[index] != null && Objects.equals(table[index].key, key)) {
+        if (check(key)) {
             result = table[index].value;
         }
         return result;
@@ -67,9 +76,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean remove(K key) {
         boolean result = false;
         int index = getBasket(key);
-        if (table[index] != null && key != null && table[index].key != null
-                && key.hashCode() == table[index].key.hashCode()
-                || table[index] != null && Objects.equals(table[index].key, key)) {
+        if (check(key)) {
             table[index] = null;
             count--;
             modCount++;
