@@ -8,6 +8,7 @@ public class Analize {
         int added = 0;
         int changed = 0;
         int deleted = 0;
+
         HashMap<Integer, String> mapPrevious = new HashMap<>();
         for (var user : previous) {
             mapPrevious.put(user.getId(), user.getName());
