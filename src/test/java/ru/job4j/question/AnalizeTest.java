@@ -69,7 +69,7 @@ class AnalizeTest {
     }
 
     @Test
-    void whenChangedAndDelete() {
+    void whenDeleteAndChanged() {
         User u1 = new User(1, "A");
         User u2 = new User(2, "B");
         User u3 = new User(3, "C");

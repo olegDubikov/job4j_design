@@ -1,7 +1,6 @@
 package ru.job4j.question;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class Analize {
     public static Info diff(Set<User> previous, Set<User> current) {
@@ -13,22 +12,22 @@ public class Analize {
         for (var user : previous) {
             mapPrevious.put(user.getId(), user.getName());
         }
-
-        for (var user : current) {
-            if (!mapPrevious.containsValue(user.getName())
-                    && mapPrevious.containsKey(user.getId())) {
+        ArrayList<User> arrCurrent = new ArrayList<>(current);
+        for (var user : arrCurrent) {
+            if (mapPrevious.containsKey(user.getId())
+                    && !mapPrevious.containsValue(user.getName())) {
                 changed++;
             }
-            if (mapPrevious.size() > current.size()) {
+            if (mapPrevious.size() > arrCurrent.size()
+                    && deleted < 1) {
                 deleted++;
-                break;
             }
-            if (mapPrevious.size() < current.size()) {
+            if (mapPrevious.size() < arrCurrent.size()
+                    && added < 1) {
                 added++;
-                break;
             }
-            if (!mapPrevious.containsKey(user.getId())
-                    && mapPrevious.size() == current.size()) {
+            if (mapPrevious.size() == arrCurrent.size()
+                    && !mapPrevious.containsKey(user.getId())) {
                 added++;
                 deleted++;
             }
