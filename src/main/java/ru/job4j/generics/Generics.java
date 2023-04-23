@@ -25,8 +25,8 @@ public class Generics {
         System.out.println();
 
         gen.printLowerBoundedWildCard(first);
-        gen.printLowerBoundedWildCard(second);
-        /*      gen.printLowerBoundedWildCard(third);*/
+        /*      gen.printLowerBoundedWildCard(second);
+                gen.printLowerBoundedWildCard(third);*/
     }
 
     public void printObject(List<?> list) {
