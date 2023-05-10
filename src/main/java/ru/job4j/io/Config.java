@@ -20,10 +20,6 @@ public class Config {
             String str = read.readLine();
             while (str != null) {
                 validate(str);
-                if (!str.startsWith("#") && str.contains("=")) {
-                    String[] arr = str.split("=", 2);
-                    values.put(arr[0], arr[1]);
-                }
                 str = read.readLine();
             }
         } catch (IOException e) {
@@ -32,18 +28,18 @@ public class Config {
     }
 
     private void validate(String s) {
-        String[] arr = s.split("=", 2);
-        if (!s.contains("=") && !s.startsWith("#") && !s.isEmpty()) {
-            throw new IllegalArgumentException("This is just line");
-        }
-        if (!s.startsWith("#") && s.contains("=") && s.length() > 1) {
+        if (!s.startsWith("#") && s.length() > 2 && s.contains("=")) {
+            String[] arr = s.split("=", 2);
+            values.put(arr[0], arr[1]);
             if (arr[0].length() == 0) {
                 throw new IllegalArgumentException("No key");
-            } else if (arr[1].length() == 0) {
+            }
+            if (arr[1].length() == 0) {
                 throw new IllegalArgumentException("No value");
             }
-        }
-        if (s.length() == 1) {
+        } else if (!s.contains("=") && !s.startsWith("#") && !s.isEmpty()) {
+            throw new IllegalArgumentException("This is just line");
+        } else if (s.startsWith("=") && s.length() == 1) {
             throw new IllegalArgumentException("Line contain only \"=\"");
         }
     }
