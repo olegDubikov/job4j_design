@@ -22,9 +22,10 @@ public class Config {
                 if (str.startsWith("#") || str.isBlank()) {
                     continue;
                 }
-                validate(str);
-                String[] arr = str.split("=", 2);
-                values.put(arr[0], arr[1]);
+                if (validate(str)) {
+                    String[] arr = str.split("=", 2);
+                    values.put(arr[0], arr[1]);
+                }
                 str = read.readLine();
             }
         } catch (IOException e) {
@@ -32,19 +33,24 @@ public class Config {
         }
     }
 
-    private void validate(String s) {
-        if (s.length() > 1 && s.contains("=")) {
-            if (s.startsWith("=")) {
-                throw new IllegalArgumentException("No key");
-            }
-            if (s.indexOf('=') == s.length() - 1) {
-                throw new IllegalArgumentException("No value");
-            }
-        } else if (!s.contains("=")) {
-            throw new IllegalArgumentException("This is just line");
-        } else if (s.startsWith("=") && s.length() == 1) {
+    private boolean validate(String s) {
+        if (s.startsWith("=") && s.length() == 1) {
             throw new IllegalArgumentException("Line contain only \"=\"");
         }
+        if (s.startsWith("=")) {
+            throw new IllegalArgumentException(
+                    String.format("Line \"%s\" does not key", s));
+        }
+        if (s.indexOf('=') == s.length() - 1) {
+            throw new IllegalArgumentException(
+                    String.format("Line \"%s\" does not value", s));
+        }
+
+        if (!s.contains("=")) {
+            throw new IllegalArgumentException(
+                    String.format("Line \"%s\" does not contain the symbol \"=\"", s));
+        }
+        return true;
     }
 
     public String value(String key) {

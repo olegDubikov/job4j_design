@@ -50,7 +50,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("No key");
+                .hasMessage("Line \"=value\" does not key");
     }
 
     @Test
@@ -59,7 +59,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("No value");
+                .hasMessage("Line \"key=\" does not value");
     }
 
     @Test
@@ -68,6 +68,6 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("This is just line");
+                .hasMessage("Line \"Welcom to JAVA!\" does not contain the symbol \"=\"");
     }
 }
