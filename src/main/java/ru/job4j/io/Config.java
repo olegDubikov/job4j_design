@@ -19,7 +19,12 @@ public class Config {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             String str = read.readLine();
             while (str != null) {
+                if (str.startsWith("#") || str.isBlank()) {
+                    continue;
+                }
                 validate(str);
+                String[] arr = str.split("=", 2);
+                values.put(arr[0], arr[1]);
                 str = read.readLine();
             }
         } catch (IOException e) {
@@ -28,16 +33,14 @@ public class Config {
     }
 
     private void validate(String s) {
-        if (!s.startsWith("#") && s.length() > 2 && s.contains("=")) {
-            String[] arr = s.split("=", 2);
-            values.put(arr[0], arr[1]);
-            if (arr[0].length() == 0) {
+        if (s.length() > 2 && s.contains("=")) {
+            if (s.startsWith("=")) {
                 throw new IllegalArgumentException("No key");
             }
-            if (arr[1].length() == 0) {
+            if (s.indexOf('=') == s.length() - 1) {
                 throw new IllegalArgumentException("No value");
             }
-        } else if (!s.contains("=") && !s.startsWith("#") && !s.isEmpty()) {
+        } else if (!s.contains("=")) {
             throw new IllegalArgumentException("This is just line");
         } else if (s.startsWith("=") && s.length() == 1) {
             throw new IllegalArgumentException("Line contain only \"=\"");

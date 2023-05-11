@@ -21,7 +21,6 @@ class ConfigTest {
     void whenComment() {
         String path = "./data/with_comment.properties";
         Config config = new Config(path);
-        config.load();
         assertThatThrownBy(() -> config.value("#key"))
                 .isInstanceOf(UnsupportedOperationException.class)
                 .hasMessage("Don't impl this method yet!");
@@ -31,7 +30,6 @@ class ConfigTest {
     void whenEmptyLine() {
         String path = "./data/with_empty_line.properties";
         Config config = new Config(path);
-        config.load();
         assertThatThrownBy(() -> config.value(" "))
                 .isInstanceOf(UnsupportedOperationException.class)
                 .hasMessage("Don't impl this method yet!");
