@@ -34,8 +34,9 @@ public class Config {
     }
 
     private boolean validate(String s) {
-        if (s.startsWith("=") && s.length() == 1) {
-            throw new IllegalArgumentException("Line contain only \"=\"");
+        if (!s.contains("=")) {
+            throw new IllegalArgumentException(
+                    String.format("Line \"%s\" does not contain the symbol \"=\"", s));
         }
         if (s.startsWith("=")) {
             throw new IllegalArgumentException(
@@ -44,11 +45,6 @@ public class Config {
         if (s.indexOf('=') == s.length() - 1) {
             throw new IllegalArgumentException(
                     String.format("Line \"%s\" does not value", s));
-        }
-
-        if (!s.contains("=")) {
-            throw new IllegalArgumentException(
-                    String.format("Line \"%s\" does not contain the symbol \"=\"", s));
         }
         return true;
     }

@@ -36,15 +36,6 @@ class ConfigTest {
     }
 
     @Test
-    void whenOnlyEquals() {
-        String path = "./data/only_equals.properties";
-        Config config = new Config(path);
-        assertThatThrownBy(config::load)
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Line contain only \"=\"");
-    }
-
-    @Test
     void whenNoKey() {
         String path = "./data/without_key.properties";
         Config config = new Config(path);
