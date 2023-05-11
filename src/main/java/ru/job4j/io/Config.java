@@ -33,7 +33,7 @@ public class Config {
     }
 
     private void validate(String s) {
-        if (s.length() > 2 && s.contains("=")) {
+        if (s.length() > 1 && s.contains("=")) {
             if (s.startsWith("=")) {
                 throw new IllegalArgumentException("No key");
             }
