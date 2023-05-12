@@ -8,36 +8,16 @@ public class Analysis {
         try (BufferedReader in = new BufferedReader(new FileReader(sours));
              PrintWriter out = new PrintWriter(target)) {
             StringBuilder builder = new StringBuilder();
+            boolean check = false;
             String str = in.readLine();
-            int x = 235959;
-            int y = 235959;
-            int count = 0;
-
             while (str != null) {
                 String[] s = str.split(" ");
-                String c = s[1];
-                String a = c.replaceAll(":", "");
-                if (str.contains("400 ") || str.contains("500 ")) {
-                    if (count == 1) {
-                        str = in.readLine();
-                        continue;
-                    }
-                    x = Integer.parseInt(a);
-                    if (x > y) {
-                        builder.append(c).append(";");
-                        count++;
-                    }
-                }
-                if (str.contains("200 ") || str.contains("300 ")) {
-                    if (count > 1) {
-                        str = in.readLine();
-                        continue;
-                    }
-                    y = Integer.parseInt(a);
-                    if (y > x) {
-                        builder.append(c).append(System.lineSeparator());
-                        count--;
-                    }
+                if (!check && (str.contains("400 ") || str.contains("500 "))) {
+                    check = true;
+                    builder.append(s[1]).append(";");
+                } else if (check && (str.contains("200 ") || str.contains("300 "))) {
+                    check = false;
+                    builder.append(s[1]).append(System.lineSeparator());
                 }
                 str = in.readLine();
             }
