@@ -31,7 +31,7 @@ class AnalysisTest {
     }
 
     @Test
-    void unavailableOneTwo(@TempDir Path tempDir) throws IOException {
+    void unavailableTwo(@TempDir Path tempDir) throws IOException {
         File source = tempDir.resolve("server.txt").toFile();
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("200 09:10:11");
