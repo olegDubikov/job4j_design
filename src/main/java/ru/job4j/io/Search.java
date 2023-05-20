@@ -9,13 +9,27 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
-        search(start, p -> p.toFile().getName().endsWith(".log")).forEach(System.out::println);
+        validate(args);
+        Path start = Paths.get(args[0]);
+        String extension = args[1];
+        search(start, p -> p.toFile().getName().endsWith(extension)).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
         SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
         return searcher.getList();
+    }
+
+    private static void validate(String[] args) {
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Write a search directory and file extension");
+        }
+        if (!Files.isDirectory(Paths.get(args[0]))) {
+            throw new IllegalArgumentException("Write a search directory");
+        }
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("Write file extension after \".\"");
+        }
     }
 }
