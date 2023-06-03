@@ -26,6 +26,15 @@ public class Zip {
         if (args.length != 3) {
             throw new IllegalArgumentException("Need three arguments");
         }
+        if (args[0].charAt(1) != 'd') {
+            throw new IllegalArgumentException("Wrong key directory");
+        }
+        if (args[1].charAt(1) != 'e') {
+            throw new IllegalArgumentException("Wrong key file");
+        }
+        if (args[2].charAt(1) != 'o') {
+            throw new IllegalArgumentException("Wrong key archive");
+        }
         File file = new File(getArgsValue(args, "d"));
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
@@ -33,6 +42,7 @@ public class Zip {
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
+
     }
 
     private static String getArgsValue(String[] args, String key) {
@@ -61,8 +71,7 @@ public class Zip {
         );
         List<Path> sources = new ArrayList<>();
         Path root = Paths.get(".");
-        Search.search(root, p -> !p.toFile().getName().endsWith(getArgsValue(args, "e"))).
-                forEach(p -> sources.add(p.toFile().toPath()));
+        Search.search(root, p -> !p.toFile().getName().endsWith(getArgsValue(args, "e")));
         zip.packFiles(sources, new File(getArgsValue(args, "o")));
     }
 }
