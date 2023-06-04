@@ -22,34 +22,21 @@ public class Zip {
         }
     }
 
-    private static void validate(String[] args) {
-        if (args.length != 3) {
-            throw new IllegalArgumentException("Need three arguments");
-        }
-        if (args[0].charAt(1) != 'd') {
-            throw new IllegalArgumentException("Wrong key directory");
-        }
-        if (args[1].charAt(1) != 'e') {
-            throw new IllegalArgumentException("Wrong key file");
-        }
-        if (args[2].charAt(1) != 'o') {
-            throw new IllegalArgumentException("Wrong key archive");
-        }
-        File file = new File(getArgsValue(args, "d"));
+    private static void validate(ArgsName argsValue) {
+        File file = new File(argsValue.get("d"));
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
-
+        if (!argsValue.get("e").startsWith(".") || argsValue.get("e").length() <= 1) {
+            throw new IllegalArgumentException("Wrong extension");
+        }
+        if (!argsValue.get("o").endsWith(".zip") || argsValue.get("o").length() <= 4) {
+            throw new IllegalArgumentException("Wrong archive");
+        }
     }
-
-    private static String getArgsValue(String[] args, String key) {
-        ArgsName argsValue = ArgsName.of(args);
-        return argsValue.get(key);
-    }
-
 
     public void packSingleFile(File source, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
@@ -63,15 +50,17 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-        validate(args);
+        ArgsName argsValue = ArgsName.of(args);
+        validate(argsValue);
         Zip zip = new Zip();
         zip.packSingleFile(
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
+
         List<Path> sources = new ArrayList<>();
         Path root = Paths.get(".");
-        Search.search(root, p -> !p.toFile().getName().endsWith(getArgsValue(args, "e")));
-        zip.packFiles(sources, new File(getArgsValue(args, "o")));
+        Search.search(root, p -> !p.toFile().getName().endsWith(argsValue.get("e")));
+        zip.packFiles(sources, new File(argsValue.get("o")));
     }
 }
