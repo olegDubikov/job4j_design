@@ -21,13 +21,14 @@ public class ConsoleChat {
     public void run() {
         List<String> phrases = readPhrases();
         String question;
+        String answer;
         List<String> log = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
         boolean run = true;
         boolean talk = true;
         System.out.println("<Chat>");
         while (run) {
-            Random random = new Random();
             question = scanner.nextLine();
             log.add(question);
             switch (question.toLowerCase()) {
@@ -42,7 +43,7 @@ public class ConsoleChat {
                 }
                 default -> {
                     if (talk) {
-                        String answer = phrases.get(random.nextInt(phrases.size()));
+                        answer = phrases.get(random.nextInt(phrases.size()));
                         System.out.println(answer);
                         log.add(answer);
                     }
