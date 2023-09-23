@@ -27,6 +27,7 @@ public class ConsoleChat {
         boolean talk = true;
         System.out.println("<Chat>");
         while (run) {
+            Random random = new Random();
             question = scanner.nextLine();
             log.add(question);
             switch (question.toLowerCase()) {
@@ -41,8 +42,9 @@ public class ConsoleChat {
                 }
                 default -> {
                     if (talk) {
-                        log.add(phrases.get(new Random().nextInt(phrases.size())));
-                        System.out.println(phrases.get(new Random().nextInt(phrases.size())));
+                        String answer = phrases.get(random.nextInt(phrases.size()));
+                        System.out.println(answer);
+                        log.add(answer);
                     }
                 }
             }
