@@ -1,25 +1,26 @@
 package ru.job4j.serialization;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.Objects;
 
+@XmlRootElement
 public class Contact implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
-    private final int zipCode;
-    private final String phone;
+    @XmlAttribute
+    private int zipCode;
+    @XmlAttribute
+    private String phone;
+
+    public Contact() {
+    }
 
     public Contact(int zipCode, String phone) {
         this.zipCode = zipCode;
         this.phone = phone;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public String getPhone() {
-        return phone;
     }
 
     @Override
