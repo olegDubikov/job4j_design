@@ -1,0 +1,10 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!--Car car = new Car(true, 5, "BMW", new Contact(1, "12345"), new String[]{"Z", "330"});-->
+<car>
+<car sedan="true" size="5" nameFactory="BMW"/>
+    <contact zipCode="1" phone="12345"/>
+    <modeles>
+        <model>Z</model>
+        <model>330</model>
+    </modeles>
+</car>
