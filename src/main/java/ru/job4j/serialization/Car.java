@@ -8,7 +8,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Arrays;
 
-@XmlRootElement(name = "person")
+@XmlRootElement(name = "car")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Car {
     @XmlAttribute
