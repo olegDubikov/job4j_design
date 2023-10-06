@@ -1,25 +1,22 @@
 package ru.job4j.serialization;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.Arrays;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-@XmlRootElement(name = "car")
-@XmlAccessorType(XmlAccessType.FIELD)
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Car {
-    @XmlAttribute
+
     private boolean sedan;
-    @XmlAttribute
+
     private int size;
-    @XmlAttribute
+
     private String nameFactory;
-    @XmlElement
+
     private Contact contact;
-    @XmlAttribute
+
     private String[] model;
 
     public Car() {
@@ -33,6 +30,26 @@ public class Car {
         this.model = model;
     }
 
+    public boolean isSedan() {
+        return sedan;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String getNameFactory() {
+        return nameFactory;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public String[] getModel() {
+        return model;
+    }
+
     @Override
     public String toString() {
         return "Car{"
@@ -44,22 +61,22 @@ public class Car {
                 + '}';
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         final Car car = new Car(true, 5, "BMW",
                 new Contact(1, "12345"), new String[]{"Z", "330"});
-        JAXBContext context = JAXBContext.newInstance(Car.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        String xml;
-        try (StringWriter writer = new StringWriter()) {
-            marshaller.marshal(car, writer);
-            xml = writer.getBuffer().toString();
-            System.out.println(xml);
-        }
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        try (StringReader reader = new StringReader(xml)) {
-            Car result = (Car) unmarshaller.unmarshal(reader);
-            System.out.println(result);
-        }
+        List<String> list = new ArrayList<>();
+        list.add("VAZ");
+        list.add("2114");
+        JSONArray jsonModel = new JSONArray(list);
+        System.out.println(jsonModel);
+        JSONObject jsonContact = new JSONObject("{\"zipCode\":11111,\"phone\":\"+7 (111) 111-11-11\"}");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("sedan", car.isSedan());
+        jsonObject.put("size", car.getSize());
+        jsonObject.put("nameFactory", "VAZ");
+        jsonObject.put("contact", jsonContact);
+        jsonObject.put("model", jsonModel);
+        System.out.println(jsonObject);
+        System.out.println(new JSONObject(car));
     }
 }
