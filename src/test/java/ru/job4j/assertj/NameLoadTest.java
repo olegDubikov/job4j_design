@@ -2,7 +2,7 @@ package ru.job4j.assertj;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NameLoadTest {
 

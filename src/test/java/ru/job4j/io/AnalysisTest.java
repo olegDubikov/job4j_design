@@ -6,7 +6,7 @@ import org.junit.jupiter.api.io.TempDir;
 import java.io.*;
 import java.nio.file.Path;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class AnalysisTest {
 

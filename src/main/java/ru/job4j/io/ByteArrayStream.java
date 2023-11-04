@@ -1,6 +1,9 @@
 package ru.job4j.io;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class ByteArrayStream {
     public static void main(String[] args) {
