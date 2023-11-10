@@ -27,7 +27,9 @@ public class SearchApp {
         List<Path> list = new ArrayList<>();
 
         switch (type) {
-            case ("name") -> list = Search.search(start, s -> s.toFile().getName().contains(name));
+            case ("name") -> {
+                list = Search.search(start, s -> s.toFile().getName().contains(name));
+            }
             case ("regex") -> {
                 Pattern pattern = Pattern.compile(name);
                 list = Search.search(start, s -> pattern.matcher(s.toString()).find());
@@ -53,11 +55,11 @@ public class SearchApp {
     }
 
     public void checkLength(String[] strings) {
-        if (strings.length !=4 ) {
+        if (strings.length != 4) {
             throw new IllegalArgumentException(
-                    "the arguments must be " +
-                            "-d =<directory> -n=<file name> " +
-                            "-t=<mask> -o=<file search result with extension .txt>");
+                    "the arguments must be "
+                            + "-d =<directory> -n=<file name> "
+                            + "-t=<mask> -o=<file search result with extension .txt>");
         }
     }
 
