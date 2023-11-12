@@ -35,7 +35,8 @@ public class SearchApp {
                 list = Search.search(start, s -> pattern.matcher(s.toString()).find());
             }
             case ("mask") -> {
-                String str = name.replace("*", "[a-zA-Z0-9]")
+                String str = name.replace(".", "[.]")
+                        .replace("*", ".*")
                         .replace("?", ".");
                 Pattern pattern = Pattern.compile(str);
                 list = Search.search(start, s -> pattern.matcher(s.toString()).find());
