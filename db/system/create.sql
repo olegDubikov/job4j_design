@@ -1,10 +1,3 @@
-create table users(
-id serial primary key,
-first_name varchar(30),
-last_name varchar(30),
-roles_id int references roles(id)
-);
-
 create table roles(
 id serial primary key,
 genre text
@@ -13,6 +6,23 @@ genre text
 create table rules(
 id serial primary key,
 emotion text
+);
+
+create table states(
+id serial primary key,
+name text
+);
+
+create table categores(
+id serial primary key,
+number int
+);
+
+create table users(
+id serial primary key,
+first_name varchar(30),
+last_name varchar(30),
+roles_id int references roles(id)
 );
 
 create table roles_rules(
@@ -39,14 +49,4 @@ create table attachs(
 id serial primary key,
 name text,
 items_id int references items(id)
-);
-
-create table states(
-id serial primary key,
-name txt
-);
-
-create table categores(
-id serial primary key,
-number int
 );
