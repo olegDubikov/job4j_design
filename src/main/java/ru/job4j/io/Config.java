@@ -17,8 +17,7 @@ public class Config {
 
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            String str = read.readLine();
-            while (str != null) {
+            for (String str : read.lines().toList()) {
                 if (str.startsWith("#") || str.isBlank()) {
                     continue;
                 }
@@ -26,7 +25,6 @@ public class Config {
                     String[] arr = str.split("=", 2);
                     values.put(arr[0], arr[1]);
                 }
-                str = read.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
