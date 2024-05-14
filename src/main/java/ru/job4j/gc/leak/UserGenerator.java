@@ -6,18 +6,18 @@ import java.util.List;
 import java.util.Random;
 
 public class UserGenerator implements Generate {
-    public final String PATH_NAMES = "src/main/java/ru/job4j/gc/leak/files/names.txt";
-    public final String PATH_SURNAMES = "src/main/java/ru/job4j/gc/leak/files/surnames.txt";
-    public final String PATH_PATRONS = "src/main/java/ru/job4j/gc/leak/files/patr.txt";
+    public final String pathNames = "src/main/java/ru/job4j/gc/leak/files/names.txt";
+    public final String pathSurnames = "src/main/java/ru/job4j/gc/leak/files/surnames.txt";
+    public final String pathPatrons = "src/main/java/ru/job4j/gc/leak/files/patr.txt";
 
-    public final String SEPARATOR = " ";
-    public final int NEW_USERS = 1000;
+    public final String separator = " ";
+    public final int newUsers = 1000;
 
     public List<String> names;
     public List<String> surnames;
     public List<String> patrons;
-    private List<User> users = new ArrayList<>();
-    private Random random;
+    private final List<User> users = new ArrayList<>();
+    private final Random random;
 
     public UserGenerator(Random random) {
         this.random = random;
@@ -28,12 +28,12 @@ public class UserGenerator implements Generate {
     public void generate() {
         users.clear();
         try {
-            for (int i = 0; i < NEW_USERS; i++) {
+            for (int i = 0; i < newUsers; i++) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(surnames.get(random.nextInt(surnames.size())));
-                sb.append(SEPARATOR);
+                sb.append(separator);
                 sb.append(names.get(random.nextInt(names.size())));
-                sb.append(SEPARATOR);
+                sb.append(separator);
                 sb.append(patrons.get(random.nextInt(patrons.size())));
                 users.add(new User(sb.toString()));
             }
@@ -44,9 +44,9 @@ public class UserGenerator implements Generate {
 
     private void readAll() {
         try {
-            names = read(PATH_NAMES);
-            surnames = read(PATH_SURNAMES);
-            patrons = read(PATH_PATRONS);
+            names = read(pathNames);
+            surnames = read(pathSurnames);
+            patrons = read(pathPatrons);
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }

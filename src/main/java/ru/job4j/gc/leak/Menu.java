@@ -4,18 +4,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Menu {
-    public final int ADD_POST = 1;
-    public final int ADD_MANY_POST = 2;
-    public final int SHOW_ALL_POSTS = 3;
-    public final int DELETE_POST = 4;
+    public final int addPost = 1;
+    public final int addManyPost = 2;
+    public final int showAllPosts = 3;
+    public final int deletePost = 4;
 
-    public final String SELECT = "Выберите меню";
-    public final String COUNT = "Выберите количество создаваемых постов";
-    public final String TEXT_OF_POST = "Введите текст";
-    public final String EXIT = "Конец работы";
-    private final String ID_FOR_DELETE = "Все посты удалены";
+    public final String select = "Выберите меню";
+    public final String count = "Выберите количество создаваемых постов";
+    public final String textOfPost = "Введите текст";
+    public final String exit = "Конец работы";
+    private final String idForDelete = "Все посты удалены";
 
-    public final String MENU = """
+    public final String menu = """
                 Введите 1 для создание поста.
                 Введите 2, чтобы создать определенное количество постов.
                 Введите 3, чтобы показать все посты.
@@ -36,33 +36,33 @@ public class Menu {
     private void start(CommentGenerator commentGenerator, Scanner scanner, UserGenerator userGenerator, PostStore postStore) {
         boolean run = true;
         while (run) {
-            System.out.println(MENU);
-            System.out.println(SELECT);
+            System.out.println(menu);
+            System.out.println(select);
             int userChoice = Integer.parseInt(scanner.nextLine());
             System.out.println(userChoice);
-            if (ADD_POST == userChoice) {
-                System.out.println(TEXT_OF_POST);
+            if (addPost == userChoice) {
+                System.out.println(textOfPost);
                 String text = scanner.nextLine();
                 userGenerator.generate();
                 commentGenerator.generate();
                 postStore.add(new Post(text, commentGenerator.getComments()));
-            } else if (ADD_MANY_POST == userChoice) {
-                System.out.println(TEXT_OF_POST);
+            } else if (addManyPost == userChoice) {
+                System.out.println(textOfPost);
                 String text = scanner.nextLine();
-                System.out.println(COUNT);
+                System.out.println(count);
                 String count = scanner.nextLine();
                 int countInt = Integer.parseInt(count);
                 for (int i = 0; i < countInt; i++) {
                     createPost(commentGenerator, userGenerator, postStore, text);
                 }
-            } else if (SHOW_ALL_POSTS == userChoice) {
-                System.out.println(PostStore.getPosts());
-            } else if (DELETE_POST == userChoice) {
-                System.out.println(ID_FOR_DELETE);
+            } else if (showAllPosts == userChoice) {
+                System.out.println(postStore.getPosts());
+            } else if (deletePost == userChoice) {
+                System.out.println(idForDelete);
                 postStore.removeAll();
             } else {
                 run = false;
-                System.out.println(EXIT);
+                System.out.println(exit);
             }
         }
         scanner.close();

@@ -7,7 +7,7 @@ public class Post {
 
     private String text;
 
-    private List<Comment> comments;
+    private final List<Comment> comments;
 
 
     public Post(String text, List<Comment> comments) {
