@@ -7,7 +7,7 @@ import java.util.List;
 public class SoftDemo {
     public static void main(String[] args) {
         example1();
-        //example2();
+        /*example2();*/
         safe();
         unsafe();
     }
@@ -53,13 +53,12 @@ public class SoftDemo {
         } else {
             System.out.println(strong);
         }
-        // do something
         someData.get(0).get();
     }
 
     private static void safe() {
         List<SoftReference<Object>> someData = new ArrayList<>();
-        //someData.add(new SoftReference<>(null));
+        /*someData.add(new SoftReference<>(null));*/
         someData.add(new SoftReference<>("b"));
         Object strong = someData.get(0).get();
         if (strong != null) {
@@ -67,6 +66,6 @@ public class SoftDemo {
         } else {
             System.out.println("strong == null");
         }
-        // work with strong
+        /*work with strong*/
     }
 }
