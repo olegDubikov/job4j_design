@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 public class Emulator {
 
-    private static final Scanner sc = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
 
     public static void main(String[] args) {
         System.out.println("Выбирете директорию: ");
-        String dirPath = sc.nextLine();
+        String dirPath = SCANNER.nextLine();
         DirFileCache dirFileCache = new DirFileCache(dirPath);
 
         boolean exit = false;
@@ -21,11 +21,11 @@ public class Emulator {
             System.out.println("Введите 1. Чтобы получить кеш файла");
             System.out.println("Введите 2. Для выхода из программы");
 
-            int choice = Integer.parseInt(sc.nextLine());
+            int choice = Integer.parseInt(SCANNER.nextLine());
             switch (choice) {
                 case 1 -> {
                     System.out.println("Введите имя файла с расширением:");
-                    String fileName = sc.nextLine();
+                    String fileName = SCANNER.nextLine();
                     String content = dirFileCache.get(fileName);
                     if (Files.isDirectory(Path.of(dirPath))) {
                         System.out.println(content);
