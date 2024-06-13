@@ -2,7 +2,7 @@ package ru.job4j.serialization;
 
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 public class Contact implements Serializable {

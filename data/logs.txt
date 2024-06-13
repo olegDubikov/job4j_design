@@ -1,0 +1,2 @@
+c:\projects\job4j_design\src\main\java\ru\job4j\io\Config.java Size: 2243 bytes
+c:\projects\job4j_tracker\src\main\java\ru\job4j\encapsulation\Config.java Size: 449 bytes
