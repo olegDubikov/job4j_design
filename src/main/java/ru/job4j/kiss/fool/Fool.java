@@ -19,7 +19,7 @@ public class Fool {
         }
     }
 
-    private static String isFizzBuzz(int number) {
+    public static String isFizzBuzz(int number) {
         StringBuilder result = new StringBuilder();
         if (number % 3 == 0) {
             result.append("Fizz");
