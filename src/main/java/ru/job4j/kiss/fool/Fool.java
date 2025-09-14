@@ -7,29 +7,16 @@ public class Fool {
         System.out.println("Игра FizzBuzz.");
         var startAt = 1;
         var input = new Scanner(System.in);
+        FizzBuzzLogic logic = new FizzBuzzLogic();
         while (startAt < 100) {
-            System.out.println(isFizzBuzz(startAt));
+            System.out.println(logic.isFizzBuzz(startAt));
             startAt++;
             var answer = input.nextLine();
-            if (!isFizzBuzz(startAt).equals(answer)) {
+            if (!logic.isFizzBuzz(startAt).equals(answer)) {
                 System.out.println("Ошибка. Начинай снова.");
                 startAt = 0;
             }
             startAt++;
         }
-    }
-
-    public static String isFizzBuzz(int number) {
-        StringBuilder result = new StringBuilder();
-        if (number % 3 == 0) {
-            result.append("Fizz");
-        }
-        if (number % 5 == 0) {
-            result.append("Buzz");
-        }
-        if (result.length() == 0) {
-            result.append(number);
-        }
-        return result.toString();
     }
 }

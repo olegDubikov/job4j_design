@@ -3,27 +3,31 @@ package ru.job4j.kiss.fool;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.job4j.kiss.fool.Fool.isFizzBuzz;
 
-class FoolTest {
+class FizzBuzzLogicTest {
+    FizzBuzzLogic logic = new FizzBuzzLogic();
+
     @Test
     void whenNumberIsThree() {
-        String result = isFizzBuzz(3);
+        String result = logic.isFizzBuzz(3);
         assertEquals("Fizz", result);
     }
+
     @Test
     void whenNumberIsFive() {
-        String result = isFizzBuzz(5);
+        String result = logic.isFizzBuzz(5);
         assertEquals("Buzz", result);
     }
+
     @Test
     void whenNumberIsFifteen() {
-        String result = isFizzBuzz(15);
+        String result = logic.isFizzBuzz(15);
         assertEquals("FizzBuzz", result);
     }
+
     @Test
     void whenNumberIsWrong() {
-        String result = isFizzBuzz(16);
+        String result = logic.isFizzBuzz(16);
         assertEquals("16", result);
     }
 }
