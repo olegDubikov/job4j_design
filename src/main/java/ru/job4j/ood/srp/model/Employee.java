@@ -1,11 +1,20 @@
 package ru.job4j.ood.srp.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import ru.job4j.ood.srp.formatter.CalendarAdapter;
+
 import java.util.Calendar;
 import java.util.Objects;
 
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
     private String name;
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
     private Calendar hired;
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
     private Calendar fired;
     private double salary;
 
@@ -20,6 +29,7 @@ public class Employee {
         this.name = name;
         this.salary = salary;
     }
+
 
     public String getName() {
         return name;
