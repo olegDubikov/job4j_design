@@ -3,7 +3,7 @@ package ru.job4j.ood.ocp;
 public class Example1 {
 
     public class Report {
-        public void send () {
+        public void send() {
             System.out.println("отправляем только в PDF");
         }
     }
