@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ControlQualityTest {
 
-    private Warehouse warehouse = new Warehouse();
-    private Shop shop = new Shop();
-    private Trash trash = new Trash();
+    private Warehouse warehouse;
+    private Shop shop;
+    private Trash trash;
 
     private final Food foodFresh = new Food("milk", LocalDate.now()
             .plusDays(30), LocalDate.now(), 100, 0);

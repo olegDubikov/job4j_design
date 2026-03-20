@@ -1,7 +1,6 @@
 package ru.job4j.ood.lsp.products;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class Food {
@@ -17,26 +16,6 @@ public class Food {
         this.createDate = createDate;
         this.price = price;
         this.discount = discount;
-    }
-
-    public double percentExpired() {
-        long totalDays = daysBetween(createDate, expiryDate);
-        long expiredDays = daysBetween(createDate, LocalDate.now());
-        return ((double) expiredDays / totalDays) * 100;
-    }
-
-    public void applyDiscount(double percentage) {
-        this.discount = percentage;
-        this.price *= (1 - discount / 100);
-    }
-
-    public boolean isExpired() {
-        return LocalDate.now().isAfter(expiryDate);
-    }
-
-
-    private long daysBetween(LocalDate from, LocalDate to) {
-        return ChronoUnit.DAYS.between(from, to);
     }
 
     public String getName() {
