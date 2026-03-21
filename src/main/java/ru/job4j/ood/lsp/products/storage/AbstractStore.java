@@ -9,6 +9,7 @@ public abstract class AbstractStore implements Store {
 
     public static final int PERCENT_EXPIRY_MIN = 25;
     public static final int PERCENT_EXPIRY_MAX = 75;
+    public static final int PERCENT_EXPIRED = 100;
 
     public static final double DISCOUNT_PERCENT = 20;
 

@@ -8,17 +8,16 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StorageTest {
-    private final Food foodFresh = new Food("milk", LocalDate.now()
-            .plusDays(30), LocalDate.now(), 100, 0);
-    private final Food foodExpiry = new Food("bread", LocalDate.now()
-            .plusDays(8), LocalDate.now()
-            .minusDays(4), 70, 0);
-    private final Food foodDiscount = new Food("meat", LocalDate.now()
-            .plusDays(85), LocalDate.now()
-            .minusDays(300), 200, 20);
-    private final Food foodExpired = new Food("fish", LocalDate.now()
-            .minusDays(3), LocalDate.now()
-            .minusDays(10), 180, 0);
+    private final Food foodFresh = createFood(10.0);
+    private final Food foodExpiry = createFood(50.0);
+    private final Food foodDiscount = createFood(85.0);
+    private final Food foodExpired = createFood(120.0);
+
+    private Food createFood(double expiryPercent) {
+        Food food = new Food("Test", LocalDate.now(), LocalDate.now(), 200, 0);
+        food.setExpiryPercent(expiryPercent);
+        return food;
+    }
 
     @Test
     void whenFoodLess25PercentInWarehouse() {

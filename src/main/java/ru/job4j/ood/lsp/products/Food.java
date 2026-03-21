@@ -9,6 +9,7 @@ public class Food {
     private final LocalDate createDate;
     private double price;
     private double discount;
+    private double expiryPercent;
 
     public Food(String name, LocalDate expiryDate, LocalDate createDate, double price, double discount) {
         this.name = name;
@@ -44,6 +45,14 @@ public class Food {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public double getExpiryPercent() {
+        return expiryPercent;
+    }
+
+    public void setExpiryPercent(double expiryPercent) {
+        this.expiryPercent = expiryPercent;
     }
 
     @Override
