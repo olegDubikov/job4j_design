@@ -23,7 +23,8 @@ public abstract class AbstractStore implements Store {
     @Override
     public abstract boolean accept(Food food);
 
+    @Override
     public List<Food> getFoods() {
-        return foods;
+        return new ArrayList<>(foods);
     }
 }
