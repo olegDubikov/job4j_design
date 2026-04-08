@@ -27,3 +27,9 @@ public class LongestUniqueSubstring {
         return str.substring(maxStart, maxStart + maxLength);
     }
 }
+
+/*
+Временная сложность: O(n), где n — длина входной строки.
+Память: O(k), где k кол-во уникальных символов, в худшем случае
+O(n) когда вся строка состоит из уникальных символов.
+ */
